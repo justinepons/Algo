@@ -1,5 +1,6 @@
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -10,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -25,12 +27,15 @@ public class Projet {
         stock = new TreeSet();
     }
     
-    public static void alimenter_stock(String nom_file) throws IOException{
-        
-        CSVReader reader = new CSVReader(new FileReader(nom_file), '\t');
-        String [] nextLine;
+    public static void alimenter_stock(List <File> file) throws IOException{
+         ListIterator <File> it = file.listIterator();
+            while(it.hasNext()){
+        File fichier = it.next();
+
+                                
+        CSVReader reader = new CSVReader(new FileReader(fichier.getAbsoluteFile()), '\t');
+        String [] nextLine ;
         while ((nextLine = reader.readNext()) != null) {
-        // nextLine[] is an array of values from the line
       
         String titre = nextLine[0];
         String description = nextLine[1];
@@ -42,7 +47,7 @@ public class Projet {
         News n = new News(titre,description,date,rss,author,link);
        
         stock.add(n);
-        
+        }
         
      }
         
@@ -57,23 +62,10 @@ public class Projet {
     /**
      *
      */
-    public static void afficher_der_news(){
-    		Iterator it;
-    		int compteur = 1;
-    		it = stock.iterator();
-    		
-    		while(it.hasNext()){
-    			News n = (News)(it.next());
-    			for(int i = 1; i<=10; i++ ){
-    				System.out.println(n.toString());
-    				compteur++;
-    			}
-    		}
-    }
+    
     
     public static void sauvegarder_stock(String nom_file) throws IOException{
-         CSVWriter writer = new CSVWriter(new FileWriter(nom_file), '\t');
-     // feed in your array (or convert your data to an array)
+         CSVWriter writer = new CSVWriter(new FileWriter(nom_file,true), '\t');
      Iterator it;
      it = stock.iterator();
      List<String[]> entries = new ArrayList<>();
@@ -88,17 +80,10 @@ public class Projet {
                 writer.close();
     		}
     
-    public static void enlever_doublon(){
-        Iterator it;
-    		int compteur = 1;
-    		it = stock.iterator();
-    		
-    		while(it.hasNext()){
-    		
-    }
+    
     
 }
-}
+
         
     
     
