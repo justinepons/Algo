@@ -26,10 +26,20 @@ public class News implements Comparable{
         }
     }
     
+    public String low_rm_punct(String stg){
+        
+        stg = stg.replaceAll("\\p{P}", " ").toLowerCase();
+        
+        return stg;
+    }
+    
     public int compareTo(Object o) {
     	  News a_comparer = (News)o;
-    	  int compare = title.compareTo(a_comparer.title);
-    	    return compare;
+    	  int compare = low_rm_punct(title).compareTo(low_rm_punct(a_comparer.title));
+          if(compare == 0){
+             compare = date.compareTo(a_comparer.date);
+          }
+    	  return compare;
     }
     
     public void settitle(String title){

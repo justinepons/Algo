@@ -31,7 +31,7 @@ public class Projet {
         String [] nextLine;
         while ((nextLine = reader.readNext()) != null) {
         // nextLine[] is an array of values from the line
-        	
+      
         String titre = nextLine[0];
         String description = nextLine[1];
         String date = nextLine[2];
@@ -40,7 +40,9 @@ public class Projet {
         String link = nextLine[5];
         
         News n = new News(titre,description,date,rss,author,link);
+       
         stock.add(n);
+        
         
      }
         
@@ -85,10 +87,25 @@ public class Projet {
                 writer.writeAll(entries);
                 writer.close();
     		}
+    
+    public static void enlever_doublon(){
+        Iterator it;
+    		int compteur = 1;
+    		it = stock.iterator();
+    		
+    		while(it.hasNext()){
+    		
+    }
+    
+}
+}
+        
+    
+    
             
         
 	
-     }
+     
     
     
 

@@ -104,7 +104,7 @@ public class MainWindow extends Application {
                                     Stage dialogStage = new Stage();
                                    
 
-                                    VBox vbox = new VBox(new Text("Veuillez entrer un fichierde sauvegarde"));
+                                    VBox vbox = new VBox(new Text("Veuillez entrer un fichier de sauvegarde"));
                                   
 
                                     dialogStage.setScene(new Scene(vbox));
