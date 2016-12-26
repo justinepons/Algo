@@ -41,6 +41,13 @@ public class MainWindow extends Application {
                         public void handle(ActionEvent event) {
                             Stage filchoo = new Stage();
                             FileChooser fileChooser = new FileChooser();
+                            
+                            fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("CSV", "*.csv")
+        );
+                            
+                            
+                            
                             File file = fileChooser.showOpenDialog(filchoo);
                             txt_chemin.setText(file.getAbsolutePath());
                         }
@@ -50,7 +57,26 @@ public class MainWindow extends Application {
 		pane.add(lbl_sauv,0,1);
 		TextField txt_sauv = new TextField();
 		pane.add(txt_sauv,1,1);
+                Button filechsv= new Button("File Chooser sv");
+                filechsv.setText("Fichier");
+                pane.add(filechsv,2,1);
                 
+                filechsv.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            Stage filchoo = new Stage();
+                            FileChooser fileChooser = new FileChooser();
+                            
+                            fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("CSV", "*.csv")
+        );
+                            
+                            
+                            
+                            File file = fileChooser.showSaveDialog(filchoo);
+                            txt_sauv.setText(file.getAbsolutePath());
+                        }
+                });
                 
                 
                 Button valider = new Button("Valider");
