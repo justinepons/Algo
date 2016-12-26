@@ -1,3 +1,4 @@
+import java.awt.Insets;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -6,6 +7,7 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -16,6 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -46,10 +49,49 @@ public class MainWindow extends Application {
                         public void handle(ActionEvent event) {
                             Projet.creer_stock();
                             try {
+                                
+                                if(txt_chemin.getText().trim().isEmpty()){
+                                    Stage dialogStage = new Stage();
+                                   
+
+                                    VBox vbox = new VBox(new Text("Veuillez entrer un fichier à traiter"));
+                                  
+
+                                    dialogStage.setScene(new Scene(vbox));
+                                    dialogStage.show();
+                                }else{
+                                    
+                                    if(txt_sauv.getText().trim().isEmpty()){
+                                    Stage dialogStage = new Stage();
+                                   
+
+                                    VBox vbox = new VBox(new Text("Veuillez entrer un fichierde sauvegarde"));
+                                  
+
+                                    dialogStage.setScene(new Scene(vbox));
+                                    dialogStage.show();
+                                }else{
                                 Projet.alimenter_stock(txt_chemin.getText());
                                 Projet.sauvegarder_stock(txt_sauv.getText());
+                                 Stage dialogStage = new Stage();
+                                   
+
+                                    VBox vbox = new VBox(new Text("Fichier Sauvegarder avec succès"));
+                                  
+
+                                    dialogStage.setScene(new Scene(vbox));
+                                    dialogStage.show();
+                                }
+                                }
                             } catch (IOException ex) {
-                                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                                 Stage dialogStage = new Stage();
+                                   
+
+                                    VBox vbox = new VBox(new Text("Le fichier à traiter n'existe pas "));
+                                  
+
+                                    dialogStage.setScene(new Scene(vbox));
+                                    dialogStage.show();
                             }
                             }   
                         });
