@@ -32,6 +32,19 @@ public class MainWindow extends Application {
 		pane.add(lbl_chemin,0,0);
 		TextField txt_chemin = new TextField();
 		pane.add(txt_chemin,1,0);
+                Button filech= new Button("File Chooser");
+                filech.setText("Fichier");
+                pane.add(filech,2,0);
+                
+                filech.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            Stage filchoo = new Stage();
+                            FileChooser fileChooser = new FileChooser();
+                            File file = fileChooser.showOpenDialog(filchoo);
+                            txt_chemin.setText(file.getAbsolutePath());
+                        }
+                });
 		
                 Label lbl_sauv = new Label("Entrez le fichier de sauvegarde");
 		pane.add(lbl_sauv,0,1);
@@ -110,6 +123,8 @@ public class MainWindow extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+            
+                
 		 primaryStage.setTitle("News");
 		 primaryStage.setScene(construitScene());
 		 primaryStage.sizeToScene();
