@@ -1,20 +1,33 @@
-
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
 import java.util.TreeSet;
 
 public class Projet {
-    private TreeSet stock;
-    public void creer_stock(){
+    
+    
+   
+    
+    
+    
+    private static TreeSet stock;
+    public static void creer_stock(){
         stock = new TreeSet();
     }
     
-    public void alimenter_stock() throws IOException{
+    public static void alimenter_stock(String nom_file) throws IOException{
         
-        CSVReader reader = new CSVReader(new FileReader("/Users/justinepons/Documents/Master 1/Algorithmique/TD/Projet/huffpost-fr/fr-blogs-1.csv"));
+        CSVReader reader = new CSVReader(new FileReader(nom_file), '\t');
         String [] nextLine;
         while ((nextLine = reader.readNext()) != null) {
         // nextLine[] is an array of values from the line
@@ -31,20 +44,51 @@ public class Projet {
         
      }
         
+     
+        
+        
+        
     }
     
-    public void afficher_der_news(){
+    
+    
+    /**
+     *
+     */
+    public static void afficher_der_news(){
     		Iterator it;
     		int compteur = 1;
     		it = stock.iterator();
     		
     		while(it.hasNext()){
     			News n = (News)(it.next());
-    			if(compteur == 1){
+    			for(int i = 1; i<=10; i++ ){
     				System.out.println(n.toString());
     				compteur++;
     			}
     		}
     }
+    
+    public static void sauvegarder_stock(String nom_file) throws IOException{
+         CSVWriter writer = new CSVWriter(new FileWriter(nom_file), '\t');
+     // feed in your array (or convert your data to an array)
+     Iterator it;
+     it = stock.iterator();
+     List<String[]> entries = new ArrayList<>();
+     
+    		
+    		while(it.hasNext()){
+                    News n = (News)(it.next());
+    			String[] item = n.toString().split("\n");
+                        entries.add(item);
+    			}
+                writer.writeAll(entries);
+                writer.close();
+    		}
+            
+        
+	
+     }
+    
+    
 
-}

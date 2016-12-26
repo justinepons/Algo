@@ -21,7 +21,8 @@ public class News implements Comparable{
         try {
             this.link = new URL (l);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(News.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(News.class.getName()).log(Level.SEVERE, null, ex);
+            this.link = null;
         }
     }
     
