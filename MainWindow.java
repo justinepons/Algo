@@ -52,11 +52,11 @@ public class MainWindow extends Application {
                             
                         }
                 });
-		Label date_debut = new Label("Entrez le debut de l'analyse");
+		Label date_debut = new Label("Entrez le debut de l'analyse (format : dd mm yyyy)");
                 pane.add(date_debut,0,1);
                 TextField txt_debut = new TextField();
 		pane.add(txt_debut,1,1);
-                Label date_fin = new Label("Entrez la fin de l'analyse");
+                Label date_fin = new Label("Entrez la fin de l'analyse (format : dd mm yyyy)");
                 pane.add(date_fin,0,2);
                 TextField txt_fin = new TextField();
 		pane.add(txt_fin,1,2);
@@ -176,7 +176,7 @@ public class MainWindow extends Application {
                 
 		
 		
-		Scene scene = new Scene(pane,500,500);
+		Scene scene = new Scene(pane,600,300);
 		return scene;
 	} 
 	
