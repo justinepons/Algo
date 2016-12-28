@@ -35,14 +35,16 @@ public class News implements Comparable{
     
     public int compareTo(Object o) {
     	  News a_comparer = (News)o;
-    	  int compare = low_rm_punct(title).compareTo(low_rm_punct(a_comparer.title));
-          if(compare == 0){
-              if(date == null || a_comparer.date == null){
+    	  int compare;
+          if(date == null || a_comparer.date == null){
                   compare = 1;
               } else{
              compare = date.compareTo(a_comparer.date);
           }
-          }
+          
+          if(compare == 0){
+          compare = low_rm_punct(title).compareTo(low_rm_punct(a_comparer.title));
+}
     	  return compare;
     }
     
@@ -85,15 +87,24 @@ public class News implements Comparable{
     public URL getlink(){
         return link;
     }
+    
+    public void setdate(Date date){
+        this.date = date;
+    }
 
-    public String toString(){
+    public Date getdate(){
+        return date;
+    }
+
+    public String toString(int n){
         String chaine =
-            "\n Titre : " + title +
-            "\n Description : " + description +
-            "\n Flux RSS : " + rss +
-            "\n Auteur : " + author +
-            "\n Source : "+ link +
-            "\n Date : "+ date + "\n";
+            "\n" + title +
+            "\n " + description +
+            "\n " + rss +
+            "\n " + author +
+            "\n "+ link +
+            "\n "+ date  + 
+            "\n " + Projet.intervalle(date, n);
         return chaine;
     }
     

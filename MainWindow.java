@@ -1,7 +1,12 @@
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
@@ -18,6 +23,8 @@ import javafx.stage.Stage;
 
 public class MainWindow extends Application {
     List <File> file;
+    Date deb;
+    Date fini;
 	public Scene construitScene() {
 		GridPane pane = new GridPane();
 		
@@ -45,14 +52,27 @@ public class MainWindow extends Application {
                             
                         }
                 });
-		
+		Label date_debut = new Label("Entrez le debut de l'analyse");
+                pane.add(date_debut,0,1);
+                TextField txt_debut = new TextField();
+		pane.add(txt_debut,1,1);
+                Label date_fin = new Label("Entrez la fin de l'analyse");
+                pane.add(date_fin,0,2);
+                TextField txt_fin = new TextField();
+		pane.add(txt_fin,1,2);
+                
+                
+                
+        
+                
+                
                 Label lbl_sauv = new Label("Entrez le fichier de sauvegarde");
-		pane.add(lbl_sauv,0,1);
+		pane.add(lbl_sauv,0,4);
 		TextField txt_sauv = new TextField();
-		pane.add(txt_sauv,1,1);
+		pane.add(txt_sauv,1,4);
                 Button filechsv= new Button("File Chooser sv");
                 filechsv.setText("Fichier");
-                pane.add(filechsv,2,1);
+                pane.add(filechsv,2,4);
                 
                 filechsv.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
@@ -70,10 +90,14 @@ public class MainWindow extends Application {
                         }
                 });
                 
+                Label lbl_inter = new Label("Entrez le nombre d'intervalle");
+		pane.add(lbl_inter,0,3);
+                TextField txt_inter = new TextField();
+		pane.add(txt_inter,1,3);
                 
                 Button valider = new Button("Valider");
                     valider.setText("Valider");
-                    pane.add(valider,1,2);
+                    pane.add(valider,1,5);
                     
                     valider.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
@@ -93,18 +117,34 @@ public class MainWindow extends Application {
                                     dialogStage.setScene(new Scene(vbox));
                                     dialogStage.show();
                                 }else{
+                                SimpleDateFormat formater = new SimpleDateFormat("dd MM yyyy");
+                                        try {
+                                            
+            
+            deb = formater.parse(txt_debut.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        try {
+            fini = formater.parse(txt_fin.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
                                 Projet.creer_stock();
                                 //ListIterator <File> it = file.listIterator();
 
                                      //while(it.hasNext()){
 
                                         //File fichier = it.next();
-
-                                        Projet.alimenter_stock(file);
+                                        System.out.println(deb);
+                                        System.out.println(fini);
+                                                
+                                        Projet.alimenter_stock(file,deb,fini);
 
                                 //} 
                                 
-                                Projet.sauvegarder_stock(txt_sauv.getText());
+                                Projet.sauvegarder_stock(txt_sauv.getText(), Integer.parseInt(txt_inter.getText()));
                                  Stage dialogStage = new Stage();
                                    
 
