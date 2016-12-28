@@ -137,9 +137,16 @@ public class MainWindow extends Application {
                                      //while(it.hasNext()){
 
                                         //File fichier = it.next();
-                                        System.out.println(deb);
-                                        System.out.println(fini);
-                                                
+                                        if(deb.getTime()>fini.getTime()){
+                                             Stage dialogStage = new Stage();
+                                   
+
+                                    VBox vbox = new VBox(new Text("La date de début est supérieur à la date de fin "));
+                                  
+
+                                    dialogStage.setScene(new Scene(vbox));
+                                    dialogStage.show();
+                                        }else{                                                
                                         Projet.alimenter_stock(file,deb,fini);
 
                                 //} 
@@ -154,6 +161,7 @@ public class MainWindow extends Application {
                                     dialogStage.setScene(new Scene(vbox));
                                     dialogStage.show();
                                 }
+                                    }
                                 
                             } catch (IOException ex) {
                                  Stage dialogStage = new Stage();
