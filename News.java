@@ -1,18 +1,18 @@
 import java.net.URL;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Date;
+
 
 
 public class News implements Comparable{
     private String title;
     private String description;
-    private String date;
+    private Date date;
     private String rss;
     private String author;
     private URL link;
     
-    public News (String t, String d , String da, String r, String a, String l) throws MalformedURLException {
+    public News (String t, String d , Date da, String r, String a, String l) throws MalformedURLException {
         this.title=t;
         this.description=d;
         this.date=da;
@@ -37,7 +37,11 @@ public class News implements Comparable{
     	  News a_comparer = (News)o;
     	  int compare = low_rm_punct(title).compareTo(low_rm_punct(a_comparer.title));
           if(compare == 0){
+              if(date == null || a_comparer.date == null){
+                  compare = 1;
+              } else{
              compare = date.compareTo(a_comparer.date);
+          }
           }
     	  return compare;
     }
@@ -106,4 +110,3 @@ public class News implements Comparable{
 
 
 }
-
