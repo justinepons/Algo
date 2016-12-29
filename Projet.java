@@ -38,7 +38,7 @@ public class Projet {
         return date_sortie;
     }
     
-    public static Long intervalle(Date date_entree,int n){
+    public static List <Long> intervalle_taille_egale(int n){
         
         
         News N_min = (News) stock.first();
@@ -50,14 +50,33 @@ public class Projet {
         Long diff = Date_max.getTime() - Date_min.getTime();
         Long in = diff/n;
         
-       Long n_inter = (date_entree.getTime() - Date_min.getTime()) / in;
+       List <Long> n_inter = new ArrayList<Long>();
+       for(int i = 0; i<n; i++){
+           n_inter.add(Date_min.getTime() + i*in);
+       }
         
         
         
-        return n_inter+1;
+        return n_inter;
         
                 
     } 
+    
+    public static int intervalle(List <Long> inter, Date entree){
+        ListIterator <Long> it = inter.listIterator();
+        int i=0;
+            while(it.hasNext()){
+                Long inte = it.next();
+                if(entree.getTime()<inte){
+                    break;
+                }
+                i++;
+                
+            }
+        
+        
+        return i;
+    }
     
     public static void alimenter_stock(List <File> file, Date debut, Date fin) throws IOException{
          
@@ -106,7 +125,7 @@ public class Projet {
      *
      * 
      */
-    public static void sauvegarder_stock(String nom_file, int inter) throws IOException{
+    public static void sauvegarder_stock(String nom_file) throws IOException{
          CSVWriter writer = new CSVWriter(new FileWriter(nom_file,true), '\t');
      Iterator it;
      it = stock.iterator();
@@ -115,7 +134,7 @@ public class Projet {
     		
     		while(it.hasNext()){
                     News n = (News)(it.next());
-    			String[] item = n.toString(inter).split("\n");
+    			String[] item = n.toString().split("\n");
                         entries.add(item);
     			}
                 writer.writeAll(entries);

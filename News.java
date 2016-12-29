@@ -96,15 +96,15 @@ public class News implements Comparable{
         return date;
     }
 
-    public String toString(int n){
-        String chaine =
-            "\n" + title +
-            "\n " + description +
-            "\n " + rss +
-            "\n " + author +
-            "\n "+ link +
-            "\n "+ date  + 
-            "\n " + Projet.intervalle(date, n);
+    public  String toString(){
+        String chaine;
+        chaine = "\n" + title +
+                "\n " + description +
+                "\n " + rss +
+                "\n " + author +
+                "\n "+ link +
+                "\n "+ date  +
+                "\n " + Projet.intervalle(MainWindow.getintervalle(), date);
         return chaine;
     }
     

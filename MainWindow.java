@@ -25,6 +25,11 @@ public class MainWindow extends Application {
     List <File> file;
     Date deb;
     Date fini;
+   static List <Long> intervalle;
+    
+    public static List <Long>  getintervalle(){
+        return intervalle;
+    }
 	public Scene construitScene() {
 		GridPane pane = new GridPane();
 		
@@ -62,7 +67,10 @@ public class MainWindow extends Application {
 		pane.add(txt_fin,1,2);
                 
                 
-                
+                Label lbl_inter = new Label("Intervalles de temps égaux");
+		pane.add(lbl_inter,0,3);
+                TextField txt_inter = new TextField();
+		pane.add(txt_inter,1,3);
         
                 
                 
@@ -90,10 +98,7 @@ public class MainWindow extends Application {
                         }
                 });
                 
-                Label lbl_inter = new Label("Entrez le nombre d'intervalle");
-		pane.add(lbl_inter,0,3);
-                TextField txt_inter = new TextField();
-		pane.add(txt_inter,1,3);
+                
                 
                 Button valider = new Button("Valider");
                     valider.setText("Valider");
@@ -151,7 +156,9 @@ public class MainWindow extends Application {
 
                                 //} 
                                 
-                                Projet.sauvegarder_stock(txt_sauv.getText(), Integer.parseInt(txt_inter.getText()));
+                                intervalle = Projet.intervalle_taille_egale(Integer.parseInt(txt_inter.getText()));
+                               
+                                Projet.sauvegarder_stock(txt_sauv.getText());
                                  Stage dialogStage = new Stage();
                                    
 
