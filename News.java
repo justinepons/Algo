@@ -5,6 +5,7 @@ import java.util.Date;
 
 
 public class News implements Comparable{
+   //champs d'un news
     private String title;
     private String description;
     private Date date;
@@ -25,17 +26,19 @@ public class News implements Comparable{
             this.link = null;
         }
     }
-    
+    //fonction qui permet d'enlever la ponctuation et mettre en minuscules
+    // ceci permet d'enlever les doublons
     public String low_rm_punct(String stg){
         
         stg = stg.replaceAll("\\p{P}", " ").toLowerCase();
         
         return stg;
     }
-    
+    //fonction de tri du TreeSet
     public int compareTo(Object o) {
     	  News a_comparer = (News)o;
     	  int compare;
+          //on trie par date
           if(date == null || a_comparer.date == null){
                   compare = 1;
               } else{
@@ -43,11 +46,12 @@ public class News implements Comparable{
           }
           
           if(compare == 0){
+          //on trie ensuite par titre, en utilisant la fonciton low_rm_punct
           compare = low_rm_punct(title).compareTo(low_rm_punct(a_comparer.title));
 }
     	  return compare;
     }
-    
+    //getters et setters
     public void settitle(String title){
         this.title = title;
     }
@@ -95,28 +99,25 @@ public class News implements Comparable{
     public Date getdate(){
         return date;
     }
-
-    public  String toString(){
+    //foncton pour mettre une news sous format String
+    public  String toString(int i){
         String chaine;
-        chaine = "\n" + title +
+        chaine =  title +
                 "\n " + description +
                 "\n " + rss +
                 "\n " + author +
                 "\n "+ link +
-                "\n "+ date  +
-                "\n " + Projet.intervalle(MainWindow.getintervalle(), date);
+                "\n "+ date;
+                //si i est différent de 1, on n'ajoute pas d'intervalle
+                if(i==1){
+                //on calcule l'intervalle dans lequel se retrouve la news
+                //on récupère le tableau d'intervalle que l'utilisateur à définit dans l'interface graphique
+                chaine = chaine + "\n " + Projet.intervalle(MainWindow.getintervalle(), date);
+                }
         return chaine;
     }
     
-    public static void afficher() {
-        System.out.println("Afficher");
-        
-    }
     
-    public void main(){
-    	
-    	
-    }
 
 
 
