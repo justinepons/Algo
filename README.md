@@ -1,13 +1,4 @@
-# Algo
-
-#changement Nico
-
-#changement bastien
-
-Fait : Début interface graphique avec explorateur de fichier
-Enlever les doublons
-
+Code fini
 A faire :
-
-- Découpage en intervalle avec
-    -soit en choisissant les dates des intervalles
+- Manuel d'utilisation de l'interface
+- Rapport
