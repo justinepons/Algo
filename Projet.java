@@ -26,6 +26,11 @@ public class Projet {
         stock = new TreeSet();
     }
     
+    public void setstock(TreeSet stock){
+        this.stock = stock;
+    }
+    
+    
     public static Date change_date(String chaine){
         Date date_sortie = new Date();
         
@@ -126,7 +131,7 @@ public class Projet {
      * 
      */
     public static void sauvegarder_stock(String nom_file) throws IOException{
-         CSVWriter writer = new CSVWriter(new FileWriter(nom_file,true), '\t');
+         CSVWriter writer = new CSVWriter(new FileWriter(nom_file), '\t');
      Iterator it;
      it = stock.iterator();
      List<String[]> entries = new ArrayList<>();
@@ -139,6 +144,7 @@ public class Projet {
     			}
                 writer.writeAll(entries);
                 writer.close();
+                stock = new TreeSet();
     		}
     
     

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -261,6 +262,7 @@ public class MainWindow extends Application {
                                 
                             try {        
                                 Projet.sauvegarder_stock(txt_sauv.getText());
+                                
                                 Stage dialogStage = new Stage();
                                    
 
